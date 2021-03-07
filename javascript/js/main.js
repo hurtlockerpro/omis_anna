@@ -63,7 +63,7 @@ array.forEach ((element, index) => {
 function multiply(x, y) {
   // x = argument, y = argument // VOID
   //console.log(x * y)
-  return x * y;
+  //return x * y;
 }
 
 console.log(multiply(10, 15));
@@ -73,6 +73,9 @@ let result = multiply(11, 16);
 
 // 0 = "audi"
 
+// json object
+// key: value
+//['audi']
 let obj1 = {
   auto1: 'audi',
   auto2: 'bmw',
@@ -81,8 +84,98 @@ let obj1 = {
     a: 1,
     b: 2,
   },
+  auto5: {
+    c: 'text',
+    d: true,
+  },
 };
 
 //array[1]
 console.log(obj1.auto3);
 console.log(obj1.auto4.b);
+
+let simpleArray = Object.entries(obj1);
+console.log(simpleArray);
+
+for (let index = 0; index < simpleArray.length; index++) {
+  console.log(
+    'Key: ',
+    simpleArray[index][0],
+    ', Value: ',
+    simpleArray[index][1]
+  );
+
+  if (typeof simpleArray[index][1] == 'object') {
+    // <--
+    let simpleArray2 = Object.entries(simpleArray[index][1]);
+    for (let subIndex = 0; subIndex < simpleArray2.length; subIndex++) {
+      console.log(
+        ' sub: Key: ',
+        simpleArray2[subIndex][0],
+        ', Value: ',
+        simpleArray2[subIndex][1]
+      );
+    }
+  }
+}
+
+class GeometricalFigures {
+  //_width;
+
+  #radius
+
+  static diagonal = 10;
+
+  constructor(width, raduis = 50,  height = 100) {
+    console.log("this is constructor")
+
+    if (width <= 0) {
+      console.log('Please insert square width')
+    } else {
+      this._width = width
+    }
+
+    if (height <= 0) {
+      console.log('Please insert square height')
+    } else {
+      this._height = height
+    }
+
+    this.#radius = raduis
+  }
+
+  drawSquare() {
+    let div = document.createElement('div')
+    div.style.width = this._width + 'px'
+    div.style.height = this._height + 'px'
+
+    div.style.border = '1px'
+    div.style.borderStyle = 'solid' // <--
+    div.style.borderColor = 'black'
+
+    return div.outerHTML
+  }
+
+  static getDiagonal()
+  {
+    console.log("diagonal: ", this.diagonal)
+  }
+}
+
+// 1 
+let cls = new GeometricalFigures()
+cls._height = 150
+cls._width = 250
+console.log(cls.drawSquare())
+document.write(cls.drawSquare())
+
+
+// 2
+let cls1 = new GeometricalFigures(25, 150)
+console.log(cls1.drawSquare())
+document.write(cls1.drawSquare())
+
+// 3 
+let cls3 = GeometricalFigures.diagonal;
+GeometricalFigures.getDiagonal()
+
