@@ -1,0 +1,29 @@
+
+.myStyle{
+    width: 100px;
+    height: 100px;
+    border: 1px solid red;
+    background-color: blue;
+    border-radius: 50%;
+}
+
+.myStyle2{
+    width: 100px;
+    height: 100px;
+    border: 1px solid red;
+    background-color: green;
+    border-radius: 50%;
+}
+
+.nav-item {}
+.nav-link{}
+
+
+
+
+
+
+
+.isActive{
+    background-color: green;
+}
