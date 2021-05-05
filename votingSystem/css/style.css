@@ -1,0 +1,9 @@
+
+.questionTitle{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.questionTitle:first-letter{
+    text-transform: capitalize
+}

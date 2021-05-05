@@ -1,0 +1,37 @@
+
+
+.myTestNewColor{
+    border-color: red; /* <- */
+}
+
+
+/* multi element -> class */
+.myTest{
+    width: 100px;
+    height: 100px;
+    border-width: 2px;
+    border-color: violet; /* <- */
+    border-style: double;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* uniq element -> id */
+#myTest{
+    font-size: 24px;
+    font-style: italic;
+    border-color: blue; /* <- */
+}

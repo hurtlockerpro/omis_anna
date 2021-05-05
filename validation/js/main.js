@@ -2,7 +2,14 @@
 // 1 find element
 let input = document.getElementById('exampleInputText')
 
+// find error element
 let alertDanger = document.querySelector('div .alert-danger')
+
+// find success element
+let alertSuccess = document.querySelector('div .alert-success')
+
+// find save button
+let btnSave = document.getElementById('btnSave')
 
 
 function checkInput(){
@@ -39,8 +46,17 @@ function checkInput(){
 }
 
 input.addEventListener('keyup', (event) => {
-
     checkInput()
 })
+
+
+btnSave.addEventListener('click', (event) => {
+
+    event.preventDefault()
+
+    console.log('button was clicked')
+    // checkInput()
+})
+
 
 
