@@ -14,7 +14,10 @@ let btnNo = document.getElementById('btnNo')
 let questions = [
     'question 1 ?', // 0
     'question 2 ?', // 1
-    'question 3 ?' // 2
+    'question 3 ?', // 2
+    'question 4 ?', // 2
+    
+
 ]
 
 let answers = []
@@ -50,6 +53,9 @@ function generateQuestionList(){
         //console.log(questions[index]);
 
         a = generateQuestionItem(questions[index])
+        // add here data-
+        a.setAttribute('data-qIndex', index)
+
         if (index == activeQuestionIndex)
         {
             a.classList.add('active')
@@ -58,6 +64,22 @@ function generateQuestionList(){
     }
     questionsList.innerHTML = tagA
 
+    // link event
+    /*
+    let btns = document.querySelectorAll('a.list-group-item')
+
+    for (let index = 0; index < btns.length; index++) {
+
+        btns[index].addEventListener('click', (event) => {
+            //console.log(event)
+            console.log('fsefgsfgs', event.target.dataset.qindex)
+
+            //activeQuestionIndex = event.target.dataset.qindex
+            //generateQuestionList()
+        })
+        
+    }
+    */
 }
 
 function generateQuestionItem(questionTitle){
@@ -111,10 +133,10 @@ btnYes.addEventListener('click', (event) => {
             answerNo: 0
         }
 
-        answers.push(answer)
+        answers[activeQuestionIndex] = answer
     }
-
-    
+    // generate chart
+    generateChart()
 })
 
 btnNo.addEventListener('click', (event) => {
@@ -129,9 +151,12 @@ btnNo.addEventListener('click', (event) => {
             answerYes: 0,
             answerNo: 1
         }
-
-        answers.push(answer)
+        //answers.push(answer)
+        answers[activeQuestionIndex] = answer
     }
+
+    // generate chart
+    generateChart()
 })
 
 function checkAnswer(questionIndex){
@@ -143,6 +168,61 @@ function checkAnswer(questionIndex){
         }
     }
     return false
+}
+
+function generateChart(){
+
+    let chartData = [
+        ['Question', 'Yes answers', 'No answers'] // 0
+    ]
+    for (let index = 0; index < answers.length; index++) {
+        if (answers[index] != null){
+            chartData.push(
+                [
+                    questions[index], // question text
+                    answers[index].answerYes,    // yes answers
+                    answers[index].answerNo // no answer
+                ]
+            )
+        }
+    }
+    /*
+    [
+        ['Galaxy', 'Distance', 'Brightness'], // 0
+        ['Canis Major Dwarf', 8000, 23.3] // 1
+    ]
+    */
+
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawStuff);
+
+    function drawStuff() {
+      var data = new google.visualization.arrayToDataTable(chartData);
+
+      var options = {
+        width: 800,
+        chart: {
+          title: 'Voting answers'
+        },
+        bars: 'vertical', // Required for Material Bar Charts.
+        /*series: {
+          0: { axis: 'Yes' }, // Bind series 0 to an axis named 'distance'.
+          1: { axis: 'No' } // Bind series 1 to an axis named 'brightness'.
+        },*/
+        /*axes: {
+          x: {
+            distance: {label: 'parsecs'}, // Bottom x-axis.
+            brightness: {side: 'top', label: 'apparent magnitude'} // Top x-axis.
+          }
+        }*/
+      };
+
+    var chart = new google.charts.Bar(
+        document.getElementById('votingResults')
+        );
+    chart.draw(data, options);
+  };
+
 }
 
 
